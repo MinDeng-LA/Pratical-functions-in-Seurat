@@ -1,0 +1,16 @@
+#rename the identity
+Seurat_object@meta.data%>%head()
+Idents(Seurat_object) <- "celltype"
+Seurat_object <- RenameIdents(Seurat_object,
+                            "Keratinocyte 1" = "Keratinocyte",
+                            "Keratinocyte 2" = "SGC")
+Seurat_object$celltype <- Idents(Seurat_object)
+levels(Seurat_object)
+
+#reorder the identity
+Idents(Seurat_object) 
+levels_order <- rev(c("Myeloid cell", "Keratinocyte", "Endothelial cell",  "Melanocyte", "Fibroblast",
+                  "Smooth muscle", "SGC", "Lymphocyte")) #"Myeloid cell" is gonna be the first one
+Seurat_object$celltype <- factor(Seurat_object$celltype, levels = levels_order)
+Idents(Seurat_object) <- Seurat_object$celltype
+levels(Seurat_object)
