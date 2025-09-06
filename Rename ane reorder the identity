@@ -1,4 +1,4 @@
-#rename the identity
+#First one: rename the identity
 Seurat_object@meta.data%>%head()
 Idents(Seurat_object) <- "celltype"
 Seurat_object <- RenameIdents(Seurat_object,
@@ -14,3 +14,14 @@ levels_order <- rev(c("Myeloid cell", "Keratinocyte", "Endothelial cell",  "Mela
 Seurat_object$celltype <- factor(Seurat_object$celltype, levels = levels_order)
 Idents(Seurat_object) <- Seurat_object$celltype
 levels(Seurat_object)
+
+
+#Second one: sampler
+new.cluster.ids <- c("Naive CD4 T", "CD14+ Mono", "Memory CD4 T", "B", "CD8 T", "FCGR3A+ Mono",
+    "NK", "DC", "Platelet")
+names(new.cluster.ids) <- levels(pbmc)
+pbmc <- RenameIdents(pbmc, new.cluster.ids)
+#Save these as a new metadata column "celltype"
+Asian_White$celltype <- Idents(Asian_White)
+Asian_White@meta.data%>%head()
+levels(Asian_White)
