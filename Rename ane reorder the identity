@@ -17,7 +17,6 @@ levels(Seurat_object)
 
 
 
-
 #Second one: sampler
 new.cluster.ids <- c("Naive CD4 T", "CD14+ Mono", "Memory CD4 T", "B", "CD8 T", "FCGR3A+ Mono",
     "NK", "DC", "Platelet")
@@ -35,7 +34,12 @@ Idents(Asian_White) <- factor(
                "Basal KC", "Differentiated KC1", "Differentiated KC2", "Differentiated KC3",
                "Langerhans/DC", "Macrophage", "T-CD4 cell", "T-CD8 cell",
                "Endothelial cell", "Pericyte","Melanocyte"))
+#Save these as a new metadata column "celltype"
+library(tidyverse)
+Asian_White$celltype <- Idents(Asian_White)
 #Check and save object:
-Idents(Asian_White)
+Idents(Asian_White) <- "celltype"
+levels(Asian_White)
 DimPlot(Asian_White, reduction = "umap", label = TRUE, pt.size = 0.5, cols = my36colors)
+ggsave(".//umap with cluater_ID.pdf", width =10 , height =6)
 save(Asian_White, file = "Asian_White.Rdata")
