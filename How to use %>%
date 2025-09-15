@@ -1,0 +1,7 @@
+pbmc <- CreateSeuratObject(pbmc_data) %>%
+    PercentageFeatureSet(pattern = "^MT-", col.name = "percent.mt") %>%
+    SCTransform(vars.to.regress = "percent.mt") %>%
+    RunPCA() %>%
+    FindNeighbors(dims = 1:30) %>%
+    RunUMAP(dims = 1:30) %>%
+    FindClusters()
