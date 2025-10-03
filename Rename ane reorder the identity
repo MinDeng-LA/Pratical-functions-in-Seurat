@@ -17,7 +17,7 @@ levels(Seurat_object)
 
 
 
-#Second one: sampler
+#Second one: simpler
 new.cluster.ids <- c("Naive CD4 T", "CD14+ Mono", "Memory CD4 T", "B", "CD8 T", "FCGR3A+ Mono",
     "NK", "DC", "Platelet")
 names(new.cluster.ids) <- levels(pbmc)
